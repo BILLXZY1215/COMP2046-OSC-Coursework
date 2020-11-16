@@ -13,8 +13,8 @@ int main(){
     struct element * pHead = NULL;
     struct element * pTail = NULL;
     struct process * otemps[NUMBER_OF_PROCESSES];
-    float Avg_response_time = 0;
-    float Avg_turnAround_time = 0;
+    long int Avg_response_time = 0;
+    long int Avg_turnAround_time = 0;
     long int response[NUMBER_OF_PROCESSES];
     long int turnAround[NUMBER_OF_PROCESSES];
 
@@ -29,9 +29,9 @@ int main(){
     //-----------------------------------------------------
     // printLinkedList(pHead);
     //-----------------------------------------------------
-    // Ready! Get the current Time first
-    struct timeval currentTime;
-    gettimeofday(&currentTime, NULL);
+    // // Ready! Get the current Time first
+    // struct timeval currentTime;
+    // gettimeofday(&currentTime, NULL);
     // Run Processes!
     while(pHead != NULL){
         struct timeval oStartTime;
@@ -40,9 +40,9 @@ int main(){
         struct process * otemp = (struct process *)(pHead -> pData);
         // SJF is based on non-preemptive job!
         runNonPreemptiveJob(otemp, &oStartTime, &oEndTime);
-        // 0 <= otemp->iProcessId <= NUMBER_OF_PROCESSES, so we can see it as an index
-        response[otemp->iProcessId] = getDifferenceInMilliSeconds(currentTime, oStartTime);
-        turnAround[otemp->iProcessId] = getDifferenceInMilliSeconds(currentTime, oEndTime);
+        // (0 <= otemp->iProcessId <= NUMBER_OF_PROCESSES), so we can see it as an index
+        response[otemp->iProcessId] = getDifferenceInMilliSeconds(otemp->oTimeCreated, oStartTime);
+        turnAround[otemp->iProcessId] = getDifferenceInMilliSeconds(otemp->oTimeCreated, oEndTime);
         Avg_response_time += response[otemp->iProcessId];
         Avg_turnAround_time += turnAround[otemp->iProcessId];
         //Print ResponseTime / TurnAroundTime For Each Process
@@ -56,8 +56,8 @@ int main(){
     Avg_response_time = Avg_response_time / NUMBER_OF_PROCESSES;
     Avg_turnAround_time = Avg_turnAround_time / NUMBER_OF_PROCESSES;
     printf("----------\n");
-    printf("Average Response Time: %.2f\n", Avg_response_time);
-    printf("Average turnAround Time: %.2f\n", Avg_turnAround_time);
+    printf("Average Response Time: %d\n", Avg_response_time);
+    printf("Average turnAround Time: %d\n", Avg_turnAround_time);
     return 0;
 }
 
@@ -103,7 +103,3 @@ void printLinkedList(struct element * pHead){
     }
     printf("----------\n");
 }
-
-
-
-

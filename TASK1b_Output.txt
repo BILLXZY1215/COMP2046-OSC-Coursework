@@ -29,5 +29,5 @@ Process 2:
 Response Time: 831 
 TurnAround Time: 975 
 ----------
-Average Response Time: 429.40
-Average turnAround Time: 549.30
+Average Response Time: 429
+Average turnAround Time: 549

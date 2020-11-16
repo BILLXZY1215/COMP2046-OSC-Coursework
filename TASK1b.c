@@ -12,8 +12,8 @@ int main(){
     struct element * pHead = NULL;
     struct element * pTail = NULL;
     struct process * otemps[NUMBER_OF_PROCESSES];
-    float Avg_response_time = 0;
-    float Avg_turnAround_time = 0;
+    long int Avg_response_time = 0;
+    long int Avg_turnAround_time = 0;
     long int response[NUMBER_OF_PROCESSES];
     long int turnAround[NUMBER_OF_PROCESSES];
     // Generate NUMBER_OF_PROCESSES and store in an array and sort by iPriority -> Implement PQ Algorithm
@@ -31,9 +31,9 @@ int main(){
     // printLinkedList(pHead);
     //-------------------------------------------------------------------------------
 
-    // Ready! Get the current Time first
-    struct timeval currentTime;
-    gettimeofday(&currentTime, NULL);
+    // // Ready! Get the current Time first
+    // struct timeval currentTime;
+    // gettimeofday(&currentTime, NULL);
     //Run Processes!
     while(pHead != NULL){
         struct element * pSubHead = (struct element *)(pHead -> pData);
@@ -44,8 +44,8 @@ int main(){
             struct process * otemp = (struct process *)(pSubHead -> pData);
             runNonPreemptiveJob(otemp, &oStartTime, &oEndTime);
             // 0 <= otemp->iProcessId <= NUMBER_OF_PROCESSES, so we can see it as an index
-            response[otemp->iProcessId] = getDifferenceInMilliSeconds(currentTime, oStartTime);
-            turnAround[otemp->iProcessId] = getDifferenceInMilliSeconds(currentTime, oEndTime);
+            response[otemp->iProcessId] = getDifferenceInMilliSeconds(otemp->oTimeCreated, oStartTime);
+            turnAround[otemp->iProcessId] = getDifferenceInMilliSeconds(otemp->oTimeCreated, oEndTime);
             Avg_response_time += response[otemp->iProcessId];
             Avg_turnAround_time += turnAround[otemp->iProcessId];
             // Print ResponseTime / TurnAroundTime For Each Process
@@ -67,7 +67,7 @@ int main(){
                 if(otemp->iInitialBurstTime == otemp->iRemainingBurstTime){
                     //First Running
                     runPreemptiveJob(otemp, &oStartTime, &oEndTime);
-                    response[otemp->iProcessId] = getDifferenceInMilliSeconds(currentTime, oStartTime);
+                    response[otemp->iProcessId] = getDifferenceInMilliSeconds(otemp->oTimeCreated, oStartTime);
                 }else{
                     //Process has been interrupted by Time Slice before, now it's not first running
                     runPreemptiveJob(otemp, &oStartTime, &oEndTime);
@@ -75,7 +75,7 @@ int main(){
                 //Check Remaining Burst Time
                 if(otemp->iRemainingBurstTime == 0){
                     // Process Finished
-                    turnAround[otemp->iProcessId] = getDifferenceInMilliSeconds(currentTime, oEndTime);
+                    turnAround[otemp->iProcessId] = getDifferenceInMilliSeconds(otemp->oTimeCreated, oEndTime);
                     removeFirst(&pSubHead, &pSubTail); //Process Finished, delete from the head
                     // Print ResponseTime / TurnAroundTime For Each Process
                     printf("Process %d: \n", otemp -> iProcessId);
@@ -98,8 +98,8 @@ int main(){
     Avg_response_time = Avg_response_time / NUMBER_OF_PROCESSES;
     Avg_turnAround_time = Avg_turnAround_time / NUMBER_OF_PROCESSES;
     printf("----------\n");
-    printf("Average Response Time: %.2f\n", Avg_response_time);
-    printf("Average turnAround Time: %.2f\n", Avg_turnAround_time);
+    printf("Average Response Time: %d\n", Avg_response_time);
+    printf("Average turnAround Time: %d\n", Avg_turnAround_time);
     return 0;
 }
 
