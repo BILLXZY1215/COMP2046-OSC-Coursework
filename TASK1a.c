@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <sys/time.h>
 #include "coursework.h"
@@ -6,35 +7,57 @@
 
 void generateSJF(struct process * otemps[]);
 void implementSJFlinkedList(struct process * otemps[], struct element ** pHead, struct element ** pTail);
+void printLinkedList(struct element * pHead);
 
 int main(){
-    int count = 0;
     struct element * pHead = NULL;
     struct element * pTail = NULL;
     struct process * otemps[NUMBER_OF_PROCESSES];
+    float Avg_response_time = 0;
+    float Avg_turnAround_time = 0;
+    long int response[NUMBER_OF_PROCESSES];
+    long int turnAround[NUMBER_OF_PROCESSES];
 
-    // Generate NUMBER_OF_PRODUCERS_PROCESSES and store in an array and sort by iInitialBurstTime -> Implement SJF Algorithm
+    // Generate NUMBER_OF_PROCESSES and store in an array and sort by iInitialBurstTime -> Implement SJF Algorithm
     generateSJF(otemps);
     // Add to Linked List
     implementSJFlinkedList(otemps, &pHead, &pTail);
+
+    //Print Linked List as Format:
+    // Process 9:
+    // Burst Time: 23
+    //-----------------------------------------------------
+    // printLinkedList(pHead);
+    //-----------------------------------------------------
     // Ready! Get the current Time first
     struct timeval currentTime;
     gettimeofday(&currentTime, NULL);
     // Run Processes!
-    for(count = 0; count< NUMBER_OF_PROCESSES; count++){
+    while(pHead != NULL){
         struct timeval oStartTime;
         struct timeval oEndTime;
-        //From LinkedList: Get the struct of process
+        //From LinkedList: Get the struct of process (at pHead!)
         struct process * otemp = (struct process *)(pHead -> pData);
         // SJF is based on non-preemptive job!
         runNonPreemptiveJob(otemp, &oStartTime, &oEndTime);
+        // 0 <= otemp->iProcessId <= NUMBER_OF_PROCESSES, so we can see it as an index
+        response[otemp->iProcessId] = getDifferenceInMilliSeconds(currentTime, oStartTime);
+        turnAround[otemp->iProcessId] = getDifferenceInMilliSeconds(currentTime, oEndTime);
+        Avg_response_time += response[otemp->iProcessId];
+        Avg_turnAround_time += turnAround[otemp->iProcessId];
+        //Print ResponseTime / TurnAroundTime For Each Process
         printf("Process %d: \n", otemp -> iProcessId);
-        printf("Response Time: %d \n", getDifferenceInMilliSeconds(currentTime, oStartTime));
-        printf("TurnAround Time: %d \n", getDifferenceInMilliSeconds(currentTime, oEndTime));
+        printf("Response Time: %d \n", response[otemp->iProcessId]);
+        printf("TurnAround Time: %d \n", turnAround[otemp->iProcessId]);
         // Process Finished, Remove it from the Head!
         removeFirst(&pHead, &pTail);
     }
-
+    //Print Average ResponseTime / TurnAroundTime
+    Avg_response_time = Avg_response_time / NUMBER_OF_PROCESSES;
+    Avg_turnAround_time = Avg_turnAround_time / NUMBER_OF_PROCESSES;
+    printf("----------\n");
+    printf("Average Response Time: %.2f\n", Avg_response_time);
+    printf("Average turnAround Time: %.2f\n", Avg_turnAround_time);
     return 0;
 }
 
@@ -69,6 +92,16 @@ void implementSJFlinkedList(struct process * otemps[], struct element ** pHead, 
     for(count = 0; count < NUMBER_OF_PROCESSES; count++){
         addLast(otemps[count], pHead, pTail);
     }
+}
+
+void printLinkedList(struct element * pHead){
+    while(pHead != NULL){
+        struct process * otemp = (struct process *)(pHead -> pData);
+        printf("Process %d: \n", otemp->iProcessId);
+        printf("Burst Time: %d\n", otemp->iInitialBurstTime);
+        pHead = pHead -> pNext;
+    }
+    printf("----------\n");
 }
 
 
