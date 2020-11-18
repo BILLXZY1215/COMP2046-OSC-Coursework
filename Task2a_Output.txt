@@ -1,0 +1,403 @@
+process 0 Created!
+process 1 Created!
+process 2 Created!
+process 3 Created!
+Process 0: 
+ResponseTime: 0 
+TurnAroundTime: 134 
+process 4 Created!
+Process 1: 
+ResponseTime: 134 
+TurnAroundTime: 162 
+process 5 Created!
+Process 2: 
+ResponseTime: 162 
+TurnAroundTime: 306 
+Process 3: 
+ResponseTime: 306 
+TurnAroundTime: 443 
+Process 4: 
+ResponseTime: 309 
+TurnAroundTime: 409 
+process 6 Created!
+process 7 Created!
+Process 5: 
+ResponseTime: 381 
+TurnAroundTime: 444 
+Process 6: 
+ResponseTime: 63 
+TurnAroundTime: 204 
+process 8 Created!
+process 9 Created!
+process 10 Created!
+process 11 Created!
+Process 7: 
+ResponseTime: 204 
+TurnAroundTime: 318 
+Process 8: 
+ResponseTime: 114 
+TurnAroundTime: 205 
+process 12 Created!
+Process 9: 
+ResponseTime: 205 
+TurnAroundTime: 228 
+Process 10: 
+ResponseTime: 228 
+TurnAroundTime: 240 
+process 13 Created!
+process 14 Created!
+Process 11: 
+ResponseTime: 240 
+TurnAroundTime: 358 
+process 15 Created!
+Process 12: 
+ResponseTime: 153 
+TurnAroundTime: 186 
+Process 13: 
+ResponseTime: 151 
+TurnAroundTime: 214 
+Process 14: 
+ResponseTime: 214 
+TurnAroundTime: 282 
+process 16 Created!
+process 17 Created!
+Process 15: 
+ResponseTime: 164 
+TurnAroundTime: 194 
+process 18 Created!
+process 19 Created!
+Process 16: 
+ResponseTime: 30 
+TurnAroundTime: 103 
+process 20 Created!
+Process 17: 
+ResponseTime: 103 
+TurnAroundTime: 223 
+process 21 Created!
+process 22 Created!
+Process 18: 
+ResponseTime: 193 
+TurnAroundTime: 237 
+Process 19: 
+ResponseTime: 237 
+TurnAroundTime: 299 
+Process 20: 
+ResponseTime: 226 
+TurnAroundTime: 356 
+Process 21: 
+ResponseTime: 236 
+TurnAroundTime: 258 
+Process 22: 
+ResponseTime: 258 
+TurnAroundTime: 393 
+process 23 Created!
+process 24 Created!
+process 25 Created!
+process 26 Created!
+Process 23: 
+ResponseTime: 0 
+TurnAroundTime: 99 
+Process 24: 
+ResponseTime: 99 
+TurnAroundTime: 165 
+Process 25: 
+ResponseTime: 165 
+TurnAroundTime: 279 
+Process 26: 
+ResponseTime: 279 
+TurnAroundTime: 371 
+process 27 Created!
+process 28 Created!
+process 29 Created!
+Process 27: 
+ResponseTime: 0 
+TurnAroundTime: 57 
+process 30 Created!
+process 31 Created!
+process 32 Created!
+Process 28: 
+ResponseTime: 57 
+TurnAroundTime: 120 
+Process 29: 
+ResponseTime: 120 
+TurnAroundTime: 167 
+process 33 Created!
+Process 30: 
+ResponseTime: 110 
+TurnAroundTime: 216 
+Process 31: 
+ResponseTime: 216 
+TurnAroundTime: 351 
+process 34 Created!
+process 35 Created!
+Process 32: 
+ResponseTime: 351 
+TurnAroundTime: 438 
+process 36 Created!
+Process 33: 
+ResponseTime: 328 
+TurnAroundTime: 375 
+Process 34: 
+ResponseTime: 134 
+TurnAroundTime: 148 
+Process 35: 
+ResponseTime: 148 
+TurnAroundTime: 173 
+process 37 Created!
+Process 36: 
+ResponseTime: 86 
+TurnAroundTime: 219 
+process 38 Created!
+process 39 Created!
+process 40 Created!
+Process 37: 
+ResponseTime: 133 
+TurnAroundTime: 148 
+Process 38: 
+ResponseTime: 15 
+TurnAroundTime: 150 
+process 41 Created!
+process 42 Created!
+Process 39: 
+ResponseTime: 150 
+TurnAroundTime: 244 
+process 43 Created!
+process 44 Created!
+Process 40: 
+ResponseTime: 244 
+TurnAroundTime: 282 
+Process 41: 
+ResponseTime: 132 
+TurnAroundTime: 259 
+Process 42: 
+ResponseTime: 259 
+TurnAroundTime: 298 
+Process 43: 
+ResponseTime: 204 
+TurnAroundTime: 208 
+process 45 Created!
+process 46 Created!
+process 47 Created!
+process 48 Created!
+Process 44: 
+ResponseTime: 208 
+TurnAroundTime: 313 
+Process 45: 
+ResponseTime: 105 
+TurnAroundTime: 238 
+Process 46: 
+ResponseTime: 238 
+TurnAroundTime: 265 
+Process 47: 
+ResponseTime: 265 
+TurnAroundTime: 405 
+Process 48: 
+ResponseTime: 405 
+TurnAroundTime: 482 
+process 49 Created!
+process 50 Created!
+process 51 Created!
+process 52 Created!
+process 53 Created!
+Process 49: 
+ResponseTime: 0 
+TurnAroundTime: 145 
+Process 50: 
+ResponseTime: 145 
+TurnAroundTime: 191 
+Process 51: 
+ResponseTime: 191 
+TurnAroundTime: 326 
+Process 52: 
+ResponseTime: 326 
+TurnAroundTime: 344 
+Process 53: 
+ResponseTime: 344 
+TurnAroundTime: 392 
+process 54 Created!
+process 55 Created!
+process 56 Created!
+process 57 Created!
+Process 54: 
+ResponseTime: 0 
+TurnAroundTime: 118 
+process 58 Created!
+process 59 Created!
+Process 55: 
+ResponseTime: 118 
+TurnAroundTime: 171 
+Process 56: 
+ResponseTime: 171 
+TurnAroundTime: 173 
+Process 57: 
+ResponseTime: 173 
+TurnAroundTime: 260 
+Process 58: 
+ResponseTime: 142 
+TurnAroundTime: 158 
+process 60 Created!
+process 61 Created!
+process 62 Created!
+process 63 Created!
+Process 59: 
+ResponseTime: 158 
+TurnAroundTime: 253 
+Process 60: 
+ResponseTime: 95 
+TurnAroundTime: 136 
+Process 61: 
+ResponseTime: 136 
+TurnAroundTime: 218 
+Process 62: 
+ResponseTime: 218 
+TurnAroundTime: 366 
+process 64 Created!
+process 65 Created!
+process 66 Created!
+Process 63: 
+ResponseTime: 366 
+TurnAroundTime: 448 
+Process 64: 
+ResponseTime: 82 
+TurnAroundTime: 92 
+Process 65: 
+ResponseTime: 92 
+TurnAroundTime: 210 
+process 67 Created!
+process 68 Created!
+process 69 Created!
+Process 66: 
+ResponseTime: 210 
+TurnAroundTime: 258 
+process 70 Created!
+Process 67: 
+ResponseTime: 48 
+TurnAroundTime: 85 
+process 71 Created!
+Process 68: 
+ResponseTime: 85 
+TurnAroundTime: 192 
+process 72 Created!
+Process 69: 
+ResponseTime: 192 
+TurnAroundTime: 312 
+process 73 Created!
+Process 70: 
+ResponseTime: 264 
+TurnAroundTime: 293 
+Process 71: 
+ResponseTime: 256 
+TurnAroundTime: 289 
+Process 72: 
+ResponseTime: 182 
+TurnAroundTime: 186 
+process 74 Created!
+process 75 Created!
+Process 73: 
+ResponseTime: 66 
+TurnAroundTime: 187 
+Process 74: 
+ResponseTime: 121 
+TurnAroundTime: 180 
+process 76 Created!
+process 77 Created!
+process 78 Created!
+Process 75: 
+ResponseTime: 180 
+TurnAroundTime: 221 
+process 79 Created!
+Process 76: 
+ResponseTime: 41 
+TurnAroundTime: 138 
+process 80 Created!
+process 81 Created!
+Process 77: 
+ResponseTime: 138 
+TurnAroundTime: 207 
+Process 78: 
+ResponseTime: 207 
+TurnAroundTime: 354 
+process 82 Created!
+Process 79: 
+ResponseTime: 313 
+TurnAroundTime: 435 
+process 83 Created!
+Process 80: 
+ResponseTime: 338 
+TurnAroundTime: 368 
+Process 81: 
+ResponseTime: 368 
+TurnAroundTime: 383 
+Process 82: 
+ResponseTime: 167 
+TurnAroundTime: 259 
+process 84 Created!
+process 85 Created!
+Process 83: 
+ResponseTime: 137 
+TurnAroundTime: 181 
+process 86 Created!
+process 87 Created!
+Process 84: 
+ResponseTime: 44 
+TurnAroundTime: 179 
+process 88 Created!
+Process 85: 
+ResponseTime: 179 
+TurnAroundTime: 204 
+process 89 Created!
+Process 86: 
+ResponseTime: 160 
+TurnAroundTime: 298 
+process 90 Created!
+Process 87: 
+ResponseTime: 298 
+TurnAroundTime: 392 
+Process 88: 
+ResponseTime: 257 
+TurnAroundTime: 335 
+Process 89: 
+ResponseTime: 310 
+TurnAroundTime: 320 
+process 91 Created!
+process 92 Created!
+Process 90: 
+ResponseTime: 182 
+TurnAroundTime: 265 
+process 93 Created!
+process 94 Created!
+process 95 Created!
+Process 91: 
+ResponseTime: 83 
+TurnAroundTime: 221 
+Process 92: 
+ResponseTime: 221 
+TurnAroundTime: 347 
+Process 93: 
+ResponseTime: 264 
+TurnAroundTime: 289 
+Process 94: 
+ResponseTime: 289 
+TurnAroundTime: 298 
+Process 95: 
+ResponseTime: 298 
+TurnAroundTime: 328 
+process 96 Created!
+process 97 Created!
+process 98 Created!
+Process 96: 
+ResponseTime: 0 
+TurnAroundTime: 136 
+process 99 Created!
+Process 97: 
+ResponseTime: 136 
+TurnAroundTime: 205 
+Process 98: 
+ResponseTime: 205 
+TurnAroundTime: 299 
+Process 99: 
+ResponseTime: 163 
+TurnAroundTime: 242 
+----------
+Average Response Time: 179 
+Average TuranAround Time: 255

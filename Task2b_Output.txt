@@ -1,0 +1,995 @@
+process 0 Created!
+Priority: 6 
+process 1 Created!
+Priority: 19 
+process 2 Created!
+Priority: 31 
+
+-----consume-----
+Priority: 6
+Process 0: 
+ResponseTime: 0 
+TurnAroundTime: 134 
+-----consume-----
+
+process 3 Created!
+Priority: 12 
+process 4 Created!
+Priority: 13 
+
+-----consume-----
+Priority: 12
+Process 3: 
+ResponseTime: 0 
+TurnAroundTime: 137 
+-----consume-----
+
+process 5 Created!
+Priority: 11 
+
+-----consume-----
+Priority: 11
+Process 5: 
+ResponseTime: 0 
+TurnAroundTime: 63 
+-----consume-----
+
+process 6 Created!
+Priority: 27 
+
+-----consume-----
+Priority: 13
+Process 4: 
+ResponseTime: 200 
+TurnAroundTime: 300 
+-----consume-----
+
+
+-----consume-----
+Priority: 19
+Process 1: 
+ResponseTime: 434 
+TurnAroundTime: 462 
+-----consume-----
+
+
+-----consume-----
+Priority: 27
+Process 6: 
+ResponseTime: 128 
+TurnAroundTime: 269 
+-----consume-----
+
+process 7 Created!
+Priority: 6 
+process 8 Created!
+Priority: 2 
+process 9 Created!
+Priority: 24 
+
+-----consume-----
+Priority: 2
+Process 8: 
+ResponseTime: 0 
+TurnAroundTime: 91 
+-----consume-----
+
+process 10 Created!
+Priority: 8 
+
+-----consume-----
+Priority: 6
+Process 7: 
+ResponseTime: 91 
+TurnAroundTime: 205 
+-----consume-----
+
+process 11 Created!
+Priority: 13 
+process 12 Created!
+Priority: 26 
+
+-----consume-----
+Priority: 8
+Process 10: 
+ResponseTime: 114 
+TurnAroundTime: 126 
+-----consume-----
+
+
+-----consume-----
+Priority: 13
+Process 11: 
+ResponseTime: 12 
+TurnAroundTime: 130 
+-----consume-----
+
+
+-----consume-----
+Priority: 24
+Process 9: 
+ResponseTime: 335 
+TurnAroundTime: 358 
+-----consume-----
+
+
+-----consume-----
+Priority: 26
+Process 12: 
+ResponseTime: 153 
+TurnAroundTime: 186 
+-----consume-----
+
+process 13 Created!
+Priority: 3 
+process 14 Created!
+Priority: 31 
+process 15 Created!
+Priority: 26 
+
+-----consume-----
+Priority: 3
+Process 13: 
+ResponseTime: 0 
+TurnAroundTime: 63 
+-----consume-----
+
+process 16 Created!
+Priority: 18 
+
+-----consume-----
+Priority: 18
+Process 16: 
+ResponseTime: 0 
+TurnAroundTime: 73 
+-----consume-----
+
+process 17 Created!
+Priority: 23 
+
+-----consume-----
+Priority: 23
+Process 17: 
+ResponseTime: 0 
+TurnAroundTime: 120 
+-----consume-----
+
+process 18 Created!
+Priority: 24 
+
+-----consume-----
+Priority: 24
+Process 18: 
+ResponseTime: 0 
+TurnAroundTime: 44 
+-----consume-----
+
+process 19 Created!
+Priority: 26 
+
+-----consume-----
+Priority: 26
+Process 15: 
+ResponseTime: 300 
+TurnAroundTime: 330 
+-----consume-----
+
+
+-----consume-----
+Priority: 26
+Process 15: 
+ResponseTime: 300 
+TurnAroundTime: 330 
+-----consume-----
+
+
+-----consume-----
+Priority: 31
+Process 2: 
+ResponseTime: 1326 
+TurnAroundTime: 1470 
+-----consume-----
+
+process 20 Created!
+Priority: 29 
+
+-----consume-----
+Priority: 29
+Process 20: 
+ResponseTime: 0 
+TurnAroundTime: 130 
+-----consume-----
+
+process 21 Created!
+Priority: 23 
+process 22 Created!
+Priority: 9 
+
+-----consume-----
+Priority: 9
+Process 22: 
+ResponseTime: 0 
+TurnAroundTime: 135 
+-----consume-----
+
+process 23 Created!
+Priority: 20 
+
+-----consume-----
+Priority: 20
+Process 23: 
+ResponseTime: 0 
+TurnAroundTime: 99 
+-----consume-----
+
+process 24 Created!
+Priority: 18 
+process 25 Created!
+Priority: 6 
+
+-----consume-----
+Priority: 6
+Process 25: 
+ResponseTime: 0 
+TurnAroundTime: 114 
+-----consume-----
+
+
+-----consume-----
+Priority: 18
+Process 24: 
+ResponseTime: 114 
+TurnAroundTime: 180 
+-----consume-----
+
+
+-----consume-----
+Priority: 23
+Process 21: 
+ResponseTime: 414 
+TurnAroundTime: 436 
+-----consume-----
+
+
+-----consume-----
+Priority: 31
+Process 2: 
+ResponseTime: 1326 
+TurnAroundTime: 2037 
+-----consume-----
+
+process 26 Created!
+Priority: 20 
+process 27 Created!
+Priority: 17 
+process 28 Created!
+Priority: 2 
+
+-----consume-----
+Priority: 2
+Process 28: 
+ResponseTime: 0 
+TurnAroundTime: 63 
+-----consume-----
+
+process 29 Created!
+Priority: 1 
+process 30 Created!
+Priority: 29 
+
+-----consume-----
+Priority: 1
+Process 29: 
+ResponseTime: 0 
+TurnAroundTime: 47 
+-----consume-----
+
+process 31 Created!
+Priority: 7 
+
+-----consume-----
+Priority: 7
+Process 31: 
+ResponseTime: 0 
+TurnAroundTime: 135 
+-----consume-----
+
+
+-----consume-----
+Priority: 17
+Process 27: 
+ResponseTime: 245 
+TurnAroundTime: 302 
+-----consume-----
+
+process 32 Created!
+Priority: 9 
+process 33 Created!
+Priority: 1 
+
+-----consume-----
+Priority: 1
+Process 33: 
+ResponseTime: 0 
+TurnAroundTime: 47 
+-----consume-----
+
+process 34 Created!
+Priority: 1 
+process 35 Created!
+Priority: 7 
+
+-----consume-----
+Priority: 1
+Process 34: 
+ResponseTime: 0 
+TurnAroundTime: 14 
+-----consume-----
+
+
+-----consume-----
+Priority: 7
+Process 35: 
+ResponseTime: 14 
+TurnAroundTime: 39 
+-----consume-----
+
+
+-----consume-----
+Priority: 9
+Process 32: 
+ResponseTime: 86 
+TurnAroundTime: 173 
+-----consume-----
+
+
+-----consume-----
+Priority: 20
+Process 26: 
+ResponseTime: 476 
+TurnAroundTime: 568 
+-----consume-----
+
+
+-----consume-----
+Priority: 29
+Process 30: 
+ResponseTime: 505 
+TurnAroundTime: 611 
+-----consume-----
+
+process 36 Created!
+Priority: 1 
+process 37 Created!
+Priority: 23 
+process 38 Created!
+Priority: 28 
+process 39 Created!
+Priority: 22 
+process 40 Created!
+Priority: 24 
+
+-----consume-----
+Priority: 1
+Process 36: 
+ResponseTime: 0 
+TurnAroundTime: 133 
+-----consume-----
+
+
+-----consume-----
+Priority: 22
+Process 39: 
+ResponseTime: 133 
+TurnAroundTime: 227 
+-----consume-----
+
+
+-----consume-----
+Priority: 23
+Process 37: 
+ResponseTime: 227 
+TurnAroundTime: 242 
+-----consume-----
+
+
+-----consume-----
+Priority: 24
+Process 40: 
+ResponseTime: 242 
+TurnAroundTime: 280 
+-----consume-----
+
+
+-----consume-----
+Priority: 28
+Process 38: 
+ResponseTime: 280 
+TurnAroundTime: 415 
+-----consume-----
+
+process 41 Created!
+Priority: 10 
+process 42 Created!
+Priority: 16 
+process 43 Created!
+Priority: 27 
+
+-----consume-----
+Priority: 10
+Process 41: 
+ResponseTime: 0 
+TurnAroundTime: 127 
+-----consume-----
+
+process 44 Created!
+Priority: 15 
+process 45 Created!
+Priority: 20 
+
+-----consume-----
+Priority: 15
+Process 44: 
+ResponseTime: 0 
+TurnAroundTime: 105 
+-----consume-----
+
+process 46 Created!
+Priority: 24 
+
+-----consume-----
+Priority: 16
+Process 42: 
+ResponseTime: 232 
+TurnAroundTime: 271 
+-----consume-----
+
+
+-----consume-----
+Priority: 20
+Process 45: 
+ResponseTime: 144 
+TurnAroundTime: 277 
+-----consume-----
+
+
+-----consume-----
+Priority: 24
+Process 46: 
+ResponseTime: 172 
+TurnAroundTime: 199 
+-----consume-----
+
+process 47 Created!
+Priority: 28 
+process 48 Created!
+Priority: 26 
+
+-----consume-----
+Priority: 26
+Process 48: 
+ResponseTime: 0 
+TurnAroundTime: 77 
+-----consume-----
+
+process 49 Created!
+Priority: 3 
+process 50 Created!
+Priority: 26 
+
+-----consume-----
+Priority: 3
+Process 49: 
+ResponseTime: 0 
+TurnAroundTime: 145 
+-----consume-----
+
+
+-----consume-----
+Priority: 26
+Process 50: 
+ResponseTime: 145 
+TurnAroundTime: 191 
+-----consume-----
+
+process 51 Created!
+Priority: 26 
+process 52 Created!
+Priority: 9 
+
+-----consume-----
+Priority: 9
+Process 52: 
+ResponseTime: 0 
+TurnAroundTime: 18 
+-----consume-----
+
+process 53 Created!
+Priority: 6 
+process 54 Created!
+Priority: 28 
+
+-----consume-----
+Priority: 6
+Process 53: 
+ResponseTime: 0 
+TurnAroundTime: 48 
+-----consume-----
+
+
+-----consume-----
+Priority: 26
+Process 51: 
+ResponseTime: 66 
+TurnAroundTime: 201 
+-----consume-----
+
+
+-----consume-----
+Priority: 27
+Process 43: 
+ResponseTime: 901 
+TurnAroundTime: 905 
+-----consume-----
+
+
+-----consume-----
+Priority: 28
+Process 47: 
+ResponseTime: 474 
+TurnAroundTime: 614 
+-----consume-----
+
+
+-----consume-----
+Priority: 28
+Process 47: 
+ResponseTime: 474 
+TurnAroundTime: 614 
+-----consume-----
+
+process 55 Created!
+Priority: 20 
+process 56 Created!
+Priority: 24 
+process 57 Created!
+Priority: 1 
+process 58 Created!
+Priority: 25 
+
+-----consume-----
+Priority: 1
+Process 57: 
+ResponseTime: 0 
+TurnAroundTime: 87 
+-----consume-----
+
+process 59 Created!
+Priority: 27 
+process 60 Created!
+Priority: 25 
+
+-----consume-----
+Priority: 20
+Process 55: 
+ResponseTime: 87 
+TurnAroundTime: 140 
+-----consume-----
+
+
+-----consume-----
+Priority: 24
+Process 56: 
+ResponseTime: 140 
+TurnAroundTime: 142 
+-----consume-----
+
+process 61 Created!
+Priority: 21 
+
+-----consume-----
+Priority: 21
+Process 61: 
+ResponseTime: 0 
+TurnAroundTime: 82 
+-----consume-----
+
+
+-----consume-----
+Priority: 25
+Process 58: 
+ResponseTime: 224 
+TurnAroundTime: 240 
+-----consume-----
+
+process 62 Created!
+Priority: 11 
+
+-----consume-----
+Priority: 11
+Process 62: 
+ResponseTime: 0 
+TurnAroundTime: 148 
+-----consume-----
+
+
+-----consume-----
+Priority: 25
+Process 58: 
+ResponseTime: 224 
+TurnAroundTime: 388 
+-----consume-----
+
+process 63 Created!
+Priority: 19 
+process 64 Created!
+Priority: 15 
+
+-----consume-----
+Priority: 15
+Process 64: 
+ResponseTime: 0 
+TurnAroundTime: 10 
+-----consume-----
+
+process 65 Created!
+Priority: 0 
+process 66 Created!
+Priority: 1 
+process 67 Created!
+Priority: 5 
+
+-----consume-----
+Priority: 1
+Process 66: 
+ResponseTime: 0 
+TurnAroundTime: 48 
+-----consume-----
+
+
+-----consume-----
+Priority: 5
+Process 67: 
+ResponseTime: 48 
+TurnAroundTime: 85 
+-----consume-----
+
+
+-----consume-----
+Priority: 19
+Process 63: 
+ResponseTime: 95 
+TurnAroundTime: 177 
+-----consume-----
+
+
+-----consume-----
+Priority: 27
+Process 59: 
+ResponseTime: 479 
+TurnAroundTime: 574 
+-----consume-----
+
+process 68 Created!
+Priority: 11 
+process 69 Created!
+Priority: 16 
+process 70 Created!
+Priority: 7 
+
+-----consume-----
+Priority: 7
+Process 70: 
+ResponseTime: 0 
+TurnAroundTime: 29 
+-----consume-----
+
+process 71 Created!
+Priority: 29 
+
+-----consume-----
+Priority: 11
+Process 68: 
+ResponseTime: 29 
+TurnAroundTime: 136 
+-----consume-----
+
+
+-----consume-----
+Priority: 16
+Process 69: 
+ResponseTime: 136 
+TurnAroundTime: 256 
+-----consume-----
+
+process 72 Created!
+Priority: 3 
+process 73 Created!
+Priority: 8 
+
+-----consume-----
+Priority: 3
+Process 72: 
+ResponseTime: 0 
+TurnAroundTime: 4 
+-----consume-----
+
+process 74 Created!
+Priority: 27 
+process 75 Created!
+Priority: 5 
+
+-----consume-----
+Priority: 5
+Process 75: 
+ResponseTime: 0 
+TurnAroundTime: 41 
+-----consume-----
+
+
+-----consume-----
+Priority: 8
+Process 73: 
+ResponseTime: 45 
+TurnAroundTime: 166 
+-----consume-----
+
+process 76 Created!
+Priority: 19 
+
+-----consume-----
+Priority: 19
+Process 76: 
+ResponseTime: 0 
+TurnAroundTime: 97 
+-----consume-----
+
+process 77 Created!
+Priority: 5 
+
+-----consume-----
+Priority: 5
+Process 77: 
+ResponseTime: 0 
+TurnAroundTime: 69 
+-----consume-----
+
+process 78 Created!
+Priority: 11 
+
+-----consume-----
+Priority: 11
+Process 78: 
+ResponseTime: 0 
+TurnAroundTime: 147 
+-----consume-----
+
+
+-----consume-----
+Priority: 27
+Process 74: 
+ResponseTime: 475 
+TurnAroundTime: 534 
+-----consume-----
+
+process 79 Created!
+Priority: 3 
+process 80 Created!
+Priority: 16 
+
+-----consume-----
+Priority: 3
+Process 79: 
+ResponseTime: 0 
+TurnAroundTime: 122 
+-----consume-----
+
+process 81 Created!
+Priority: 4 
+
+-----consume-----
+Priority: 4
+Process 81: 
+ResponseTime: 0 
+TurnAroundTime: 15 
+-----consume-----
+
+process 82 Created!
+Priority: 30 
+
+-----consume-----
+Priority: 16
+Process 80: 
+ResponseTime: 137 
+TurnAroundTime: 167 
+-----consume-----
+
+process 83 Created!
+Priority: 28 
+process 84 Created!
+Priority: 20 
+
+-----consume-----
+Priority: 20
+Process 84: 
+ResponseTime: 0 
+TurnAroundTime: 135 
+-----consume-----
+
+
+-----consume-----
+Priority: 28
+Process 83: 
+ResponseTime: 135 
+TurnAroundTime: 179 
+-----consume-----
+
+
+-----consume-----
+Priority: 29
+Process 71: 
+ResponseTime: 1113 
+TurnAroundTime: 1146 
+-----consume-----
+
+
+-----consume-----
+Priority: 30
+Process 82: 
+ResponseTime: 242 
+TurnAroundTime: 334 
+-----consume-----
+
+process 85 Created!
+Priority: 18 
+process 86 Created!
+Priority: 16 
+
+-----consume-----
+Priority: 16
+Process 86: 
+ResponseTime: 0 
+TurnAroundTime: 138 
+-----consume-----
+
+
+-----consume-----
+Priority: 18
+Process 85: 
+ResponseTime: 138 
+TurnAroundTime: 163 
+-----consume-----
+
+process 87 Created!
+Priority: 27 
+process 88 Created!
+Priority: 13 
+process 89 Created!
+Priority: 16 
+
+-----consume-----
+Priority: 13
+Process 88: 
+ResponseTime: 0 
+TurnAroundTime: 78 
+-----consume-----
+
+process 90 Created!
+Priority: 7 
+process 91 Created!
+Priority: 28 
+
+-----consume-----
+Priority: 7
+Process 90: 
+ResponseTime: 0 
+TurnAroundTime: 83 
+-----consume-----
+
+
+-----consume-----
+Priority: 16
+Process 89: 
+ResponseTime: 161 
+TurnAroundTime: 171 
+-----consume-----
+
+
+-----consume-----
+Priority: 27
+Process 87: 
+ResponseTime: 171 
+TurnAroundTime: 265 
+-----consume-----
+
+
+-----consume-----
+Priority: 28
+Process 91: 
+ResponseTime: 187 
+TurnAroundTime: 325 
+-----consume-----
+
+process 92 Created!
+Priority: 15 
+process 93 Created!
+Priority: 25 
+process 94 Created!
+Priority: 27 
+process 95 Created!
+Priority: 21 
+process 96 Created!
+Priority: 1 
+
+-----consume-----
+Priority: 1
+Process 96: 
+ResponseTime: 0 
+TurnAroundTime: 136 
+-----consume-----
+
+
+-----consume-----
+Priority: 15
+Process 92: 
+ResponseTime: 136 
+TurnAroundTime: 262 
+-----consume-----
+
+process 97 Created!
+Priority: 28 
+
+-----consume-----
+Priority: 21
+Process 95: 
+ResponseTime: 262 
+TurnAroundTime: 292 
+-----consume-----
+
+
+-----consume-----
+Priority: 25
+Process 93: 
+ResponseTime: 292 
+TurnAroundTime: 317 
+-----consume-----
+
+process 98 Created!
+Priority: 3 
+process 99 Created!
+Priority: 9 
+
+-----consume-----
+Priority: 3
+Process 98: 
+ResponseTime: 0 
+TurnAroundTime: 94 
+-----consume-----
+
+
+-----consume-----
+Priority: 9
+Process 99: 
+ResponseTime: 94 
+TurnAroundTime: 173 
+-----consume-----
+
+
+-----consume-----
+Priority: 27
+Process 94: 
+ResponseTime: 490 
+TurnAroundTime: 499 
+-----consume-----
+
+
+-----consume-----
+Priority: 28
+Process 97: 
+ResponseTime: 237 
+TurnAroundTime: 306 
+-----consume-----
+
+----------
+Average Response Time: 158 
+Average TuranAround Time: 241 

@@ -98,7 +98,7 @@ int main(){
     //empty and full is from 0 to MAX_BUFFER_SIZE
     sem_init(&sem.mutex, 0, 1); // Initialize the mutex to 1 => Only one thread can enter the critical section
     // Initialize data struct
-    sem.NUMBER_OF_PROCESS_CREATED = 0; 
+    sem.NUMBER_OF_PROCESS_CREATED = 0;
     sem.pHead = NULL;
     sem.pTail = NULL;
     sem.Avg_response_time = 0;
