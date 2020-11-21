@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <sys/time.h>
 #include <semaphore.h>
@@ -21,7 +22,8 @@ struct data {
 
 struct data sem;
 
-void *producer_func(){
+void *producer_func(void* arg){
+    int index = *(int* )arg;
     while(1){
 
         sem_wait(&sem.empty);  // empty-- (if empty < 0, then go to sleep)
@@ -39,7 +41,11 @@ void *producer_func(){
         // Add to the buffer
         addLast(otemp, &sem.pHead, &sem.pTail);
         sem.NUMBER_OF_PROCESS_CREATED ++;
-        printf("process %d Created!\n", sem.NUMBER_OF_PROCESS_CREATED-1);
+        printf("Producer = %d, ", index);
+        printf("Item Produced = %d, ", sem.NUMBER_OF_PROCESS_CREATED);
+        printf("New Process Id = %d, ", otemp->iProcessId);
+        printf("Burst Time = %d\n", otemp->iInitialBurstTime);
+
 
         // ---------- Exit Critical Section ----------
 
@@ -49,7 +55,8 @@ void *producer_func(){
     pthread_exit(0); // if NUMBER_OF_PROCESS_CREATED reached MAX_NUMBER_OF_JOBS, exit the thread
 }
 
-void *consumer_func(){
+void *consumer_func(void* arg){
+    int index = *(int* )arg;
     while(1){
 
         sem_wait(&sem.full);  // full-- (if full < 0, then go to sleep)
@@ -78,9 +85,12 @@ void *consumer_func(){
         sem.Avg_response_time += sem.response[otemp -> iProcessId];
         sem.Avg_turnAround_time += sem.turnAround[otemp -> iProcessId];
         // Print Response / TurnAround Time for each process
-        printf("Process %d: \n", otemp -> iProcessId);
-        printf("ResponseTime: %d \n", sem.response[otemp -> iProcessId]);
-        printf("TurnAroundTime: %d \n", sem.turnAround[otemp -> iProcessId]);
+        printf("Consumer = %d, ", index);
+        printf("Process Id = %d, ", otemp -> iProcessId);
+        printf("Previous Burst Time = %d, ",otemp -> iPreviousBurstTime);
+        printf("New Burst Time = %d, ",otemp -> iRemainingBurstTime);
+        printf("Response Time = %d, ", sem.response[otemp -> iProcessId]);
+        printf("TurnAround Time: %d\n", sem.turnAround[otemp -> iProcessId]);
         // Remove From the buffer
         removeFirst(&sem.pHead, &sem.pTail);
 
@@ -109,12 +119,14 @@ int main(){
     int i = 0;
     for(i = 0; i < NUMBER_OF_PRODUCERS; i++){
         pthread_t producer;
-        pthread_create(&producer, NULL, producer_func, NULL);
+        int index = i;
+        pthread_create(&producer, NULL, producer_func, &index);
         producerArray[i] = producer;
     }
     for(i = 0; i < NUMBER_OF_CONSUMERS; i++){
         pthread_t consumer;
-        pthread_create(&consumer, NULL, consumer_func, NULL);
+        int index = i;
+        pthread_create(&consumer, NULL, consumer_func, &index);
         consumerArray[i] = consumer;
     }
 

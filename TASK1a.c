@@ -46,16 +46,19 @@ int main(){
         Avg_response_time += response[otemp->iProcessId];
         Avg_turnAround_time += turnAround[otemp->iProcessId];
         //Print ResponseTime / TurnAroundTime For Each Process
-        printf("Process %d: \n", otemp -> iProcessId);
-        printf("Response Time: %d \n", response[otemp->iProcessId]);
-        printf("TurnAround Time: %d \n", turnAround[otemp->iProcessId]);
+        printf("Process Id = %d, ", otemp -> iProcessId);
+        printf("Priority = %d, ", otemp -> iPriority);
+        printf("Priority = %d, ", otemp -> iPriority);
+        printf("Previous Burst Time = %d, ", otemp -> iPreviousBurstTime);
+        printf("Remaining Burst Time = %d, ", otemp -> iRemainingBurstTime);
+        printf("Response Time: %d, ", response[otemp->iProcessId]);
+        printf("TurnAround Time: %d\n", turnAround[otemp->iProcessId]);
         // Process Finished, Remove it from the Head!
         removeFirst(&pHead, &pTail);
     }
     //Print Average ResponseTime / TurnAroundTime
     Avg_response_time = Avg_response_time / NUMBER_OF_PROCESSES;
     Avg_turnAround_time = Avg_turnAround_time / NUMBER_OF_PROCESSES;
-    printf("----------\n");
     printf("Average Response Time: %d\n", Avg_response_time);
     printf("Average turnAround Time: %d\n", Avg_turnAround_time);
     return 0;

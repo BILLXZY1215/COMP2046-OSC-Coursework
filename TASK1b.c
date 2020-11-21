@@ -28,7 +28,7 @@ int main(){
     //BurstTime: 91
     //-----sub end------
     //-------------------------------------------------------------------------------
-    // printLinkedList(pHead);
+    printLinkedList(pHead);
     //-------------------------------------------------------------------------------
 
     // // Ready! Get the current Time first
@@ -37,67 +37,51 @@ int main(){
     //Run Processes!
     while(pHead != NULL){
         struct element * pSubHead = (struct element *)(pHead -> pData);
-        if(pSubHead -> pNext == NULL){
-            //Only one process in the Sub Linked List: Non-preemptive Implementation
+        // Preemptive Implementation
+        struct element * subPtr = pSubHead;
+        // Find the pSubTail
+        while(subPtr -> pNext != NULL){
+            subPtr = subPtr -> pNext; // Move to pNext
+        }
+        struct element * pSubTail = subPtr;
+        while(pSubTail != NULL){
             struct timeval oStartTime;
             struct timeval oEndTime;
             struct process * otemp = (struct process *)(pSubHead -> pData);
-            runNonPreemptiveJob(otemp, &oStartTime, &oEndTime);
-            // 0 <= otemp->iProcessId <= NUMBER_OF_PROCESSES, so we can see it as an index
-            response[otemp->iProcessId] = getDifferenceInMilliSeconds(otemp->oTimeCreated, oStartTime);
-            turnAround[otemp->iProcessId] = getDifferenceInMilliSeconds(otemp->oTimeCreated, oEndTime);
-            Avg_response_time += response[otemp->iProcessId];
-            Avg_turnAround_time += turnAround[otemp->iProcessId];
-            // Print ResponseTime / TurnAroundTime For Each Process
-            printf("Process %d: \n", otemp -> iProcessId);
-            printf("Response Time: %d \n", response[otemp->iProcessId]);
-            printf("TurnAround Time: %d \n", turnAround[otemp->iProcessId]);
-        }else{
-            //Multiple processes in the Sub Linked List: Preemptive Implementation
-            struct element * subPtr = pSubHead;
-            // Find the pSubTail
-            while(subPtr -> pNext != NULL){
-                subPtr = subPtr -> pNext; // Move to pNext
+            printf("Process Id = %d, ", otemp -> iProcessId);
+            printf("Priority = %d, ", otemp -> iPriority);
+            printf("Previous Burst Time = %d, ", otemp -> iPreviousBurstTime);
+            printf("Remaining Burst Time = %d\n", otemp -> iRemainingBurstTime);
+            if(otemp->iInitialBurstTime == otemp->iRemainingBurstTime){
+                //First Running
+                runPreemptiveJob(otemp, &oStartTime, &oEndTime);
+                response[otemp->iProcessId] = getDifferenceInMilliSeconds(otemp->oTimeCreated, oStartTime);
+                printf("Response Time: %d \n", response[otemp->iProcessId]);
+            }else{
+                //Process has been interrupted by Time Slice before, now it's not first running
+                runPreemptiveJob(otemp, &oStartTime, &oEndTime);
             }
-            struct element * pSubTail = subPtr;
-            while(pSubTail != NULL){
-                struct timeval oStartTime;
-                struct timeval oEndTime;
-                struct process * otemp = (struct process *)(pSubHead -> pData);
-                if(otemp->iInitialBurstTime == otemp->iRemainingBurstTime){
-                    //First Running
-                    runPreemptiveJob(otemp, &oStartTime, &oEndTime);
-                    response[otemp->iProcessId] = getDifferenceInMilliSeconds(otemp->oTimeCreated, oStartTime);
-                }else{
-                    //Process has been interrupted by Time Slice before, now it's not first running
-                    runPreemptiveJob(otemp, &oStartTime, &oEndTime);
-                }
-                //Check Remaining Burst Time
-                if(otemp->iRemainingBurstTime == 0){
-                    // Process Finished
-                    turnAround[otemp->iProcessId] = getDifferenceInMilliSeconds(otemp->oTimeCreated, oEndTime);
-                    removeFirst(&pSubHead, &pSubTail); //Process Finished, delete from the head
-                    // Print ResponseTime / TurnAroundTime For Each Process
-                    printf("Process %d: \n", otemp -> iProcessId);
-                    printf("Response Time: %d \n", response[otemp->iProcessId]);
-                    printf("TurnAround Time: %d \n", turnAround[otemp->iProcessId]);
-                    Avg_response_time += response[otemp->iProcessId];
-                    Avg_turnAround_time += turnAround[otemp->iProcessId];
-                }else{
-                    // Time Slice Interrupted -> Process still not Finished
-                    // Add to the Sub Linked List Again, Remove from the Head
-                    addLast(otemp, &pSubHead, &pSubTail);
-                    removeFirst(&pSubHead, &pSubTail);
-                }
+            //Check Remaining Burst Time
+            if(otemp->iRemainingBurstTime == 0){
+                // Process Finished
+                turnAround[otemp->iProcessId] = getDifferenceInMilliSeconds(otemp->oTimeCreated, oEndTime);
+                removeFirst(&pSubHead, &pSubTail); //Process Finished, delete from the head
+                // Print ResponseTime / TurnAroundTime For Each Process
+                printf("TurnAround Time: %d \n", turnAround[otemp->iProcessId]);
+                Avg_response_time += response[otemp->iProcessId];
+                Avg_turnAround_time += turnAround[otemp->iProcessId];
+            }else{
+                // Time Slice Interrupted -> Process still not Finished
+                // Add to the Sub Linked List Again, Remove from the Head
+                addLast(otemp, &pSubHead, &pSubTail);
+                removeFirst(&pSubHead, &pSubTail);
             }
-
         }
         removeFirst(&pHead, &pTail); //Process Finished, delete from the head
     }
     //Print Average ResponseTime / TurnAroundTime
     Avg_response_time = Avg_response_time / NUMBER_OF_PROCESSES;
     Avg_turnAround_time = Avg_turnAround_time / NUMBER_OF_PROCESSES;
-    printf("----------\n");
     printf("Average Response Time: %d\n", Avg_response_time);
     printf("Average turnAround Time: %d\n", Avg_turnAround_time);
     return 0;
@@ -175,16 +159,20 @@ void printLinkedList(struct element * pHead){
     while(current != NULL){
         struct element * pSubHead = (struct element *)(current -> pData);
         //Ergodic Each Sub LinkedList
-        printf("------sub-----\n");
+        struct process * init = (struct process *)(pSubHead -> pData);
+        printf("Priority = %d\n\t", init->iPriority);
         while(pSubHead != NULL){
             struct process * otemp = (struct process *)(pSubHead -> pData);
-            printf("Process: %d\n", otemp->iProcessId);
-            printf("Priority: %d\n", otemp->iPriority);
-            printf("BurstTime: %d\n\n", otemp->iInitialBurstTime);
+            printf("Process Id: %d, ", otemp->iProcessId);
+            printf("Priority = %d, ", otemp->iPriority);
+            printf("Initial Burst Time = %d, ", otemp->iInitialBurstTime);
+            if(pSubHead->pNext == NULL){
+                printf("Remaining BurstTime: %d\n", otemp->iRemainingBurstTime);
+            }else{
+                printf("Remaining BurstTime: %d\n\t", otemp->iRemainingBurstTime);
+            }
             pSubHead = pSubHead->pNext;
         }
-        printf("------sub end-----\n");
         current = current->pNext;
     }
-    printf("--------------------\n");
 }
