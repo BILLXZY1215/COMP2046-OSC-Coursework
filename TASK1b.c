@@ -26,14 +26,35 @@ int main(){
     //Process: 8
     //Priority: 2
     //BurstTime: 91
+
+    //Bubble Sort: Same Priority -> Apply SJF for each process
+    struct element * str = pHead;
+    while(str != NULL){
+        struct element * substr = str->pData;
+        while(substr->pNext!=NULL){
+            struct process * temp1 = (struct process *)(substr->pData);
+            struct process * temp2 = (struct process *)(substr->pNext->pData);
+            int priority1 = temp1->iPriority;
+            int priority2 = temp2->iPriority;
+            int Time1 = temp1->iInitialBurstTime;
+            int Time2 = temp2->iInitialBurstTime;
+            if(priority1 == priority2){
+                if(Time1>Time2){
+                    // Swap two processes
+                    substr->pData = temp2;
+                    substr->pNext->pData = temp1;
+                }
+            }
+            substr = substr->pNext;
+        }
+        str = str->pNext;
+    }
+
     //-----sub end------
     //-------------------------------------------------------------------------------
     printLinkedList(pHead);
     //-------------------------------------------------------------------------------
 
-    // // Ready! Get the current Time first
-    // struct timeval currentTime;
-    // gettimeofday(&currentTime, NULL);
     //Run Processes!
     while(pHead != NULL){
         struct element * pSubHead = (struct element *)(pHead -> pData);
@@ -111,22 +132,7 @@ void generatePQ(struct process * otemps[]){
     }
     // Priority: 2 6 6 11 12 13 19 24 27 31
 
-    //Bubble Sort: Same Priority -> Apply SJF for each process
-    // for(k = 0; k < NUMBER_OF_PROCESSES-1; k++){
-    //     temp1 = otemps[k];
-    //     temp2 = otemps[k+1];
-    //     int priority1 = temp1->iPriority;
-    //     int priority2 = temp2->iPriority;
-    //     int Time1 = temp1->iInitialBurstTime;
-    //     int Time2 = temp2->iInitialBurstTime;
-    //     if(priority1 == priority2){
-    //         if(Time1>Time2){
-    //             // Swap two processes
-    //             otemps[k] = temp2;
-    //             otemps[k+1] = temp1;
-    //         }
-    //     }
-    // }
+    
 }
 
 void implementPQlinkedList(struct process * otemps[], struct element ** pHead, struct element ** pTail){
@@ -151,6 +157,7 @@ void implementPQlinkedList(struct process * otemps[], struct element ** pHead, s
     }
     //Add the last SubList Header as the pData of the main Linked List
     addLast(pSubHead, pHead, pTail);
+
 }
 
 void printLinkedList(struct element * pHead){
