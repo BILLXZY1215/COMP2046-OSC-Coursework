@@ -1,33 +1,12 @@
-Process 9: 
-Response Time: 0 
-TurnAround Time: 23 
-Process 1: 
-Response Time: 23 
-TurnAround Time: 51 
-Process 5: 
-Response Time: 51 
-TurnAround Time: 114 
-Process 8: 
-Response Time: 114 
-TurnAround Time: 205 
-Process 4: 
-Response Time: 205 
-TurnAround Time: 305 
-Process 7: 
-Response Time: 305 
-TurnAround Time: 419 
-Process 0: 
-Response Time: 419 
-TurnAround Time: 553 
-Process 3: 
-Response Time: 553 
-TurnAround Time: 690 
-Process 6: 
-Response Time: 690 
-TurnAround Time: 831 
-Process 2: 
-Response Time: 831 
-TurnAround Time: 975 
-----------
+Process Id = 9, Priority = 24, Priority = 24, Previous Burst Time = 23, Remaining Burst Time = 0, Response Time: 0, TurnAround Time: 23
+Process Id = 1, Priority = 19, Priority = 19, Previous Burst Time = 28, Remaining Burst Time = 0, Response Time: 23, TurnAround Time: 51
+Process Id = 5, Priority = 11, Priority = 11, Previous Burst Time = 63, Remaining Burst Time = 0, Response Time: 51, TurnAround Time: 114
+Process Id = 8, Priority = 2, Priority = 2, Previous Burst Time = 91, Remaining Burst Time = 0, Response Time: 114, TurnAround Time: 205
+Process Id = 4, Priority = 13, Priority = 13, Previous Burst Time = 100, Remaining Burst Time = 0, Response Time: 205, TurnAround Time: 305
+Process Id = 7, Priority = 6, Priority = 6, Previous Burst Time = 114, Remaining Burst Time = 0, Response Time: 305, TurnAround Time: 419
+Process Id = 0, Priority = 6, Priority = 6, Previous Burst Time = 134, Remaining Burst Time = 0, Response Time: 419, TurnAround Time: 553
+Process Id = 3, Priority = 12, Priority = 12, Previous Burst Time = 137, Remaining Burst Time = 0, Response Time: 553, TurnAround Time: 690
+Process Id = 6, Priority = 27, Priority = 27, Previous Burst Time = 141, Remaining Burst Time = 0, Response Time: 690, TurnAround Time: 831
+Process Id = 2, Priority = 31, Priority = 31, Previous Burst Time = 144, Remaining Burst Time = 0, Response Time: 831, TurnAround Time: 975
 Average Response Time: 319
 Average turnAround Time: 416

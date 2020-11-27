@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <sys/time.h>
 #include "coursework.h"
@@ -27,28 +26,28 @@ int main(){
     //Priority: 2
     //BurstTime: 91
 
-    //Bubble Sort: Same Priority -> Apply SJF for each process
-    struct element * str = pHead;
-    while(str != NULL){
-        struct element * substr = str->pData;
-        while(substr->pNext!=NULL){
-            struct process * temp1 = (struct process *)(substr->pData);
-            struct process * temp2 = (struct process *)(substr->pNext->pData);
-            int priority1 = temp1->iPriority;
-            int priority2 = temp2->iPriority;
-            int Time1 = temp1->iInitialBurstTime;
-            int Time2 = temp2->iInitialBurstTime;
-            if(priority1 == priority2){
-                if(Time1>Time2){
-                    // Swap two processes
-                    substr->pData = temp2;
-                    substr->pNext->pData = temp1;
-                }
-            }
-            substr = substr->pNext;
-        }
-        str = str->pNext;
-    }
+    // //Bubble Sort: Same Priority -> Apply SJF for each process
+    // struct element * str = pHead;
+    // while(str != NULL){
+    //     struct element * substr = str->pData;
+    //     while(substr->pNext!=NULL){
+    //         struct process * temp1 = (struct process *)(substr->pData);
+    //         struct process * temp2 = (struct process *)(substr->pNext->pData);
+    //         int priority1 = temp1->iPriority;
+    //         int priority2 = temp2->iPriority;
+    //         int Time1 = temp1->iInitialBurstTime;
+    //         int Time2 = temp2->iInitialBurstTime;
+    //         if(priority1 == priority2){
+    //             if(Time1>Time2){
+    //                 // Swap two processes
+    //                 substr->pData = temp2;
+    //                 substr->pNext->pData = temp1;
+    //             }
+    //         }
+    //         substr = substr->pNext;
+    //     }
+    //     str = str->pNext;
+    // }
 
     //-----sub end------
     //-------------------------------------------------------------------------------
