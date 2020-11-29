@@ -165,16 +165,18 @@ int main(){
     pthread_t producerArray[NUMBER_OF_PRODUCERS];
     pthread_t consumerArray[NUMBER_OF_CONSUMERS];
     int i = 0;
+    int index_producer[NUMBER_OF_PRODUCERS];
+    int index_consumer[NUMBER_OF_PRODUCERS];
     for(i = 0; i < NUMBER_OF_PRODUCERS; i++){
         pthread_t producer;
-        int index = i;
-        pthread_create(&producer, NULL, producer_func, &index);
+        index_producer[i] = i;
+        pthread_create(&producer, NULL, producer_func, &index_producer[i]);
         producerArray[i] = producer;
     }
     for(i = 0; i < NUMBER_OF_CONSUMERS; i++){
         pthread_t consumer;
-        int index = i;
-        pthread_create(&consumer, NULL, consumer_func, &index);
+        index_consumer[i] = i;
+        pthread_create(&consumer, NULL, consumer_func, &index_consumer[i]);
         consumerArray[i] = consumer;
     }
 
