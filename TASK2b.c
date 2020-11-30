@@ -86,7 +86,7 @@ void *consumer_func(void* arg){
     while(1){
         sem_wait(&sem.full);  // full-- (if full < 0, then go to sleep)
         // sem_wait(&sem.mutex);
-        sem_wait(&sem.mutex2);
+        sem_wait(&sem.mutex);
 
         // ---------- Enter Critical Section ----------
 
@@ -110,96 +110,78 @@ void *consumer_func(void* arg){
         if(sem.NUMBER_OF_PROCESS_CREATED == MAX_NUMBER_OF_JOBS && flag == 0){
             // In this case, producer should all exited, and all elements are consumed, but cosumers are not exited yet
             sem_post(&sem.full); // Avoid sleep forever
-            // sem_post(&sem.mutex);
-            sem_post(&sem.mutex2);
+            sem_post(&sem.mutex);
+            // sem_post(&sem.mutex2);
             break; // All processes have been consumed
         }
 
         // ---------- Exit Critical Section ----------
 
-        sem_post(&sem.mutex2);
+        // sem_post(&sem.mutex);
 
         if(flag){
+            struct process * otemp;
             // Get the process from the head
-            struct process * otemp = (struct process *)(pHead -> pData);
+            struct process * temp = (struct process *)(pHead -> pData);
+            // PQ -> PreemptiveJob
+            // sem_wait(&sem.mutex);  // mutex-- (if mutex < 0, then go to sleep)
+
+            // ---------- Enter Critical Section ----------
+
+            otemp = (struct process *)removeFirst(&LinkedListSet[(temp->iPriority)-1], &pTail);
+
+            // ---------- Exit Critical Section ----------
+
+            // sem_post(&sem.mutex); // mutex++
+
             // Run Process!
             struct timeval oStartTime;
             struct timeval oEndTime;
-            // PQ -> PreemptiveJob
-            printf("Consumer = %d, ", index);
 
             if(otemp->iInitialBurstTime == otemp->iRemainingBurstTime){
                 //First Running
-
-                // sem_wait(&sem.mutex3);
-
-                // // ---------- Enter Critical Section ----------
-
                 runPreemptiveJob(otemp, &oStartTime, &oEndTime);
+                printf("Fuck! otemp->iRemainingBurstTime = %d \n", otemp->iRemainingBurstTime);
 
-                // // ---------- Exit Critical Section ----------
-
-                // sem_post(&sem.mutex3);
                 sem.response[otemp -> iProcessId] = getDifferenceInMilliSeconds(otemp -> oTimeCreated, oStartTime);
+                printf("Consumer = %d, ", index);
                 printf("Response Time = %d, ", sem.response[otemp -> iProcessId]);
             }else {
                 //Process has been interrupted by Time Slice before, now it's not first running
                 //And the process indeed still has remaining
-
-                // sem_wait(&sem.mutex3);
-
-                // // ---------- Enter Critical Section ----------
-
                 runPreemptiveJob(otemp, &oStartTime, &oEndTime);
-
-                // // ---------- Exit Critical Section ----------
-
-                // sem_post(&sem.mutex3);
+                printf("Consumer = %d, ", index);
             }
-
             printf("Process Id = %d, ", otemp -> iProcessId);
             printf("Priority: %d, ", otemp -> iPriority);
             printf("Previous Burst Time = %d, ",otemp -> iPreviousBurstTime);
             printf("New Burst Time = %d\n",otemp -> iRemainingBurstTime);
+        
+
             //Check Remaining Burst Time
             if(otemp->iRemainingBurstTime == 0){
-
-                sem_wait(&sem.mutex);  // mutex-- (if mutex < 0, then go to sleep)
-
-                // ---------- Enter Critical Section ----------
-
                 sem.turnAround[otemp -> iProcessId] = getDifferenceInMilliSeconds(otemp -> oTimeCreated, oEndTime);
                 // Print Response / TurnAround Time for each process
                 printf("TurnAround Time = %d\n", sem.turnAround[otemp -> iProcessId]);
                 sem.Avg_response_time += sem.response[otemp -> iProcessId];
                 sem.Avg_turnAround_time += sem.turnAround[otemp -> iProcessId];
-
-                removeFirst(&LinkedListSet[(otemp->iPriority)-1], &pTail);
-
-                // ---------- Exit Critical Section ----------
-
-                sem_post(&sem.mutex); // mutex++
                 sem_post(&sem.empty[otemp->iPriority]);  // Process finish running -> activate producer
             }else{
                 // Time Slice Interrupted -> Process still not Finished
+                // Add to the Sub Linked List Again, Remove from the Head
 
-                sem_wait(&sem.mutex);  // mutex-- (if mutex < 0, then go to sleep)
-
+                // sem_wait(&sem.mutex);  // mutex-- (if mutex < 0, then go to sleep)
+                
                 // ---------- Enter Critical Section ----------
 
-                removeFirst(&LinkedListSet[(otemp->iPriority)-1], &pTail);
-                // Add to the Sub Linked List Again, Remove from the Head
                 addLast(otemp, &LinkedListSet[(otemp->iPriority)-1], &pTail);
 
-                // sem_post(&sem.full);
-
                 // ---------- Exit Critical Section ----------
-
-                sem_post(&sem.mutex); // mutex++
-
+                
+                // sem_post(&sem.mutex); // mutex++
             }
         }
-        // sem_post(&sem.mutex); // mutex++
+        sem_post(&sem.mutex);
     }
     pthread_exit(0); // if NUMBER_OF_PROCESS_CREATED reached MAX_NUMBER_OF_JOBS, exit the thread
 }
@@ -254,5 +236,8 @@ int main(){
     for(i=0;i<MAX_PRIORITY;i++){
         sem_destroy(&sem.empty[i]);
     }
+    sem_destroy(&sem.mutex2);
+    sem_destroy(&sem.mutex3);
     return 0;
 }
+
