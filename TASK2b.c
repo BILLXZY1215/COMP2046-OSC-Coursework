@@ -23,6 +23,8 @@ struct data {
 
 struct data sem;
 
+void readyQueue(int i, int index);
+
 void *producer_func(void* arg){
     int index = *(int* )arg;
 
@@ -126,6 +128,7 @@ void *producer_func(void* arg){
                     str=str->pNext;
                     if(str->pNext == NULL){ // Insert behind Tail
                         addLast(ele, &sem.pHead, &sem.pTail);
+                        break;
                     }
                 }
             }
@@ -137,6 +140,9 @@ void *producer_func(void* arg){
         printf("New Process Id = %d, ", otemp->iProcessId);
         printf("Burst Time = %d, ", otemp->iInitialBurstTime);
         printf("Priority = %d\n", otemp->iPriority);
+
+        // readyQueue(1,-1);
+
         
         // ---------- Exit Critical Section ----------
 
@@ -159,6 +165,7 @@ void *consumer_func(void* arg){
         sem_wait(&sem.full);  // full-- (if full < 0, then go to sleep)
 
         // ---------- Enter Critical Section ----------
+
 
         sem_wait(&sem.mutex);
         if(sem.NUMBER_OF_PROCESS_CREATED == MAX_NUMBER_OF_JOBS && sem.pHead == NULL){
@@ -194,6 +201,9 @@ void *consumer_func(void* arg){
             // Process finished running, activate producer
             sem_post(&sem.empty);
         }
+
+        // readyQueue(2,index);
+
         sem_post(&sem.mutex);
 
         // ---------- Exit Critical Section ----------
@@ -288,6 +298,7 @@ void *consumer_func(void* arg){
                         str=str->pNext;
                         if(str->pNext == NULL){ // Insert behind Tail
                             addLast(ele, &sem.pHead, &sem.pTail);
+                            break;
                         }
 
                     }else{
@@ -303,6 +314,8 @@ void *consumer_func(void* arg){
                 }
             }
         }
+
+        // readyQueue(3,index);
 
         // ---------- Exit Critical Section ----------
 
@@ -363,3 +376,35 @@ int main(){
     sem_destroy(&sem.empty);
     return 0;
 }
+
+void readyQueue(int i,int index){
+    struct element * str = sem.pHead;
+    if(i==1){
+        printf("\n\n----------- Producer -----------\n\n");
+    }else if(i==2){
+        printf("\n\n----------- Consumer %d TAKE -----------\n\n", index);
+    }else{
+        printf("\n\n----------- Consumer %d BACK -----------\n\n", index);
+    }
+    if(str == NULL){
+        printf("EMPTY\n");
+    }else{
+        while(str != NULL){
+            struct element * ele = (struct element *)(str->pData);
+            while(ele!=NULL){
+                struct process * process = (struct process *)(ele -> pData);
+                printf("%d (%d), ", process->iPriority, process->iProcessId);
+                ele = ele->pNext;
+            }
+            str = str->pNext;
+        }
+    }
+    if(i==1){
+        printf("\n\n----------- Producer -----------\n\n");
+    }else if(i==2){
+        printf("\n\n----------- Consumer %d TAKE -----------\n\n", index);
+    }else{
+        printf("\n\n----------- Consumer %d BACK -----------\n\n", index);
+    }
+}
+

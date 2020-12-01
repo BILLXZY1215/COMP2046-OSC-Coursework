@@ -82,6 +82,7 @@ void *producer_func(void* arg){
                     str=str->pNext;
                     if(str->pNext == NULL){ // Insert behind Tail
                         addLast(otemp, &sem.pHead, &sem.pTail);
+                        break;
                     }
                 }else{  // process1->iInitialBurstTime < otemp->iInitialBurstTime <= process2->iInitialBurstTime
                     flag = 1;
