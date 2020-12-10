@@ -28,9 +28,6 @@ void *producer_func(void* arg){
 
         sem_wait(&sem.empty);  // empty-- (if empty < 0, then go to sleep)
 
-        // Create One Process if not exceed MAX_NUMBER_OF_JOBS
-        struct process * otemp = generateProcess();
-
         sem_wait(&sem.mutex);  // mutex-- (if mutex < 0, then go to sleep)
 
         // ---------- Enter Critical Section ----------
@@ -41,6 +38,11 @@ void *producer_func(void* arg){
             sem_post(&sem.mutex);
             break;
         }
+
+
+        // Create One Process if not exceed MAX_NUMBER_OF_JOBS
+        struct process * otemp = generateProcess();
+        
         // Add to the buffer (SJF)
         struct element * str = sem.pHead;
         if(str == NULL){ // First Input
@@ -96,6 +98,7 @@ void *producer_func(void* arg){
                     break;
                 }
             }
+
         }
 
         sem.NUMBER_OF_PROCESS_CREATED ++;
@@ -109,7 +112,7 @@ void *producer_func(void* arg){
         sem_post(&sem.mutex); // mutex++
         sem_post(&sem.full);  // full++
     }
-    pthread_exit(0); // if NUMBER_OF_PROCESS_CREATED reached MAX_NUMBER_OF_JOBS, exit the thread
+    pthread_exit(NULL); // if NUMBER_OF_PROCESS_CREATED reached MAX_NUMBER_OF_JOBS, exit the thread
 }
 
 void *consumer_func(void* arg){
@@ -138,29 +141,29 @@ void *consumer_func(void* arg){
 
         sem_post(&sem.mutex); // mutex++
 
-        if(!(sem.NUMBER_OF_PROCESS_CREATED == MAX_NUMBER_OF_JOBS && sem.pTail == NULL)){
-            // Run Process!
-            struct timeval oStartTime;
-            struct timeval oEndTime;
-            // struct timeval currentTime;
-            // gettimeofday(&currentTime, NULL);
-            // SJF -> NonPreemptiveJob
-            runNonPreemptiveJob(otemp, &oStartTime, &oEndTime);
-            sem.response[otemp -> iProcessId] = getDifferenceInMilliSeconds(otemp -> oTimeCreated, oStartTime);
-            sem.turnAround[otemp -> iProcessId] = getDifferenceInMilliSeconds(otemp -> oTimeCreated, oEndTime);
-            sem.Avg_response_time += sem.response[otemp -> iProcessId];
-            sem.Avg_turnAround_time += sem.turnAround[otemp -> iProcessId];
-            // Print Response / TurnAround Time for each process
-            printf("Consumer = %d, ", index);
-            printf("Process Id = %d, ", otemp -> iProcessId);
-            printf("Previous Burst Time = %d, ",otemp -> iPreviousBurstTime);
-            printf("New Burst Time = %d, ",otemp -> iRemainingBurstTime);
-            printf("Response Time = %d, ", sem.response[otemp -> iProcessId]);
-            printf("TurnAround Time: %d\n", sem.turnAround[otemp -> iProcessId]);
-        }
+        // Run Process!
+        struct timeval oStartTime;
+        struct timeval oEndTime;
+        // struct timeval currentTime;
+        // gettimeofday(&currentTime, NULL);
+        // SJF -> NonPreemptiveJob
+        runNonPreemptiveJob(otemp, &oStartTime, &oEndTime);
+        sem.response[otemp -> iProcessId] = getDifferenceInMilliSeconds(otemp -> oTimeCreated, oStartTime);
+        sem.turnAround[otemp -> iProcessId] = getDifferenceInMilliSeconds(otemp -> oTimeCreated, oEndTime);
+        sem.Avg_response_time += sem.response[otemp -> iProcessId];
+        sem.Avg_turnAround_time += sem.turnAround[otemp -> iProcessId];
+        // Print Response / TurnAround Time for each process
+        printf("Consumer = %d, ", index);
+        printf("Process Id = %d, ", otemp -> iProcessId);
+        printf("Previous Burst Time = %d, ",otemp -> iPreviousBurstTime);
+        printf("New Burst Time = %d, ",otemp -> iRemainingBurstTime);
+        printf("Response Time = %d, ", sem.response[otemp -> iProcessId]);
+        printf("TurnAround Time: %d\n", sem.turnAround[otemp -> iProcessId]);
+        free(otemp); // avoid memeory leak
+
         sem_post(&sem.empty);  // empty++
     }
-    pthread_exit(0); // if NUMBER_OF_PROCESS_CREATED reached MAX_NUMBER_OF_JOBS, exit the thread
+    pthread_exit(NULL); // if NUMBER_OF_PROCESS_CREATED reached MAX_NUMBER_OF_JOBS, exit the thread
 }
 
 int main(){
