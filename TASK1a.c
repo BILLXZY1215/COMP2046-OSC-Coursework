@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <sys/time.h>
 #include "coursework.h"
 #include "linkedlist.h"
@@ -53,7 +54,7 @@ int main(){
         printf("Response Time: %d, ", response[otemp->iProcessId]);
         printf("TurnAround Time: %d\n", turnAround[otemp->iProcessId]);
         // Process Finished, Remove it from the Head!
-        removeFirst(&pHead, &pTail);
+        free(removeFirst(&pHead, &pTail));
     }
     //Print Average ResponseTime / TurnAroundTime
     Avg_response_time = Avg_response_time / NUMBER_OF_PROCESSES;
