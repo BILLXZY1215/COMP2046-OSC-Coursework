@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <sys/time.h>
 #include "coursework.h"
 #include "linkedlist.h"
@@ -90,6 +91,7 @@ int main(){
                 printf("TurnAround Time: %d \n", turnAround[otemp->iProcessId]);
                 Avg_response_time += response[otemp->iProcessId];
                 Avg_turnAround_time += turnAround[otemp->iProcessId];
+                free(otemp); // Avoid Memory Leak
             }else{
                 // Time Slice Interrupted -> Process still not Finished
                 // Add to the Sub Linked List Again, Remove from the Head
