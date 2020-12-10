@@ -30,8 +30,7 @@ void *producer_func(void* arg){
 
     while(1){
         sem_wait(&sem.empty);  // empty-- (if empty < 0, then go to sleep)
-        // Create One Process if not exceed MAX_NUMBER_OF_JOBS
-        struct process * otemp = generateProcess();
+
         sem_wait(&sem.mutex);  // mutex-- (if mutex < 0, then go to sleep)
 
         // ---------- Enter Critical Section ----------
@@ -42,9 +41,13 @@ void *producer_func(void* arg){
             break;
         }
 
+        // Create One Process if not exceed MAX_NUMBER_OF_JOBS
+        struct process * otemp = generateProcess();
+
         // Add process to LinkedList （sort by PQ）
         struct element * ele = (struct element *) malloc (sizeof(struct element));
         ele->pData = otemp;
+        ele->pNext = NULL; //Avoid 'Uninitialized value created by a heap allocation'
 
         if(sem.pHead == NULL){ // First Implement
             addLast(ele, &sem.pHead, &sem.pTail);
@@ -155,7 +158,7 @@ void *producer_func(void* arg){
         }
 
     }
-    pthread_exit(0); // if NUMBER_OF_PROCESS_CREATED reached MAX_NUMBER_OF_JOBS, exit the thread
+    pthread_exit(NULL); // if NUMBER_OF_PROCESS_CREATED reached MAX_NUMBER_OF_JOBS, exit the thread
 }
 
 void *consumer_func(void* arg){
@@ -168,18 +171,19 @@ void *consumer_func(void* arg){
 
 
         sem_wait(&sem.mutex);
-        if(sem.NUMBER_OF_PROCESS_CREATED == MAX_NUMBER_OF_JOBS && sem.pHead == NULL){
+        if(sem.pHead == NULL){
             sem_post(&sem.full);
             sem_post(&sem.mutex);
-            break;
+            if(sem.NUMBER_OF_PROCESS_CREATED == MAX_NUMBER_OF_JOBS){
+                break;
+            }else{
+                continue;
+            }
         }
         struct element * pSubHead;
         struct process * otemp;
-        if(sem.pHead==NULL){
-            sem_post(&sem.full);
-            sem_post(&sem.mutex);
-            continue;
-        }
+
+
         // The head of sub linked list
         pSubHead = (struct element *)removeFirst(&sem.pHead, &sem.pTail);
         struct element * subPtr = pSubHead;
@@ -188,11 +192,14 @@ void *consumer_func(void* arg){
             subPtr = subPtr -> pNext; // Move to pNext
         }
         struct element * pSubTail = subPtr;
-        if(pSubHead==NULL){
+
+        if(pSubHead->pData==NULL){
+            free(pSubHead); //avoid memory leak
             sem_post(&sem.full);
             sem_post(&sem.mutex);
             continue;
         }
+
         otemp = (struct process *)removeFirst(&pSubHead, &pSubTail);
         if(otemp->iRemainingBurstTime > TIME_SLICE){
             // process hasn't finished, cannot be removed directly, needs to addLast
@@ -222,6 +229,7 @@ void *consumer_func(void* arg){
             runPreemptiveJob(otemp, &oStartTime, &oEndTime);
         }
 
+
         //Check Remaining Burst Time
         if(otemp->iRemainingBurstTime == 0){
             first = 2;
@@ -231,10 +239,11 @@ void *consumer_func(void* arg){
             sem.Avg_response_time += sem.response[otemp->iProcessId];
             sem.Avg_turnAround_time += sem.turnAround[otemp->iProcessId];
         }
-
+        
         sem_wait(&sem.mutex);
 
         // ---------- Enter Critical Section ----------
+
         printf("Consumer = %d, ", index);
         if(first==1){
             printf("Response Time = %d, ", sem.response[otemp->iProcessId]);
@@ -245,6 +254,7 @@ void *consumer_func(void* arg){
         if(first==2){
             printf("Remaining Burst Time = %d, ", otemp -> iRemainingBurstTime);
             printf("TurnAround Time: %d \n", sem.turnAround[otemp->iProcessId]);
+            free(otemp); // avoid memory leak
         }else{
             printf("Remaining Burst Time = %d \n", otemp -> iRemainingBurstTime);
         }
@@ -313,6 +323,8 @@ void *consumer_func(void* arg){
                     }
                 }
             }
+        }else{
+            free(pSubHead); //Avoid Memory Leak
         }
 
         // readyQueue(3,index);
@@ -323,7 +335,7 @@ void *consumer_func(void* arg){
 
 
     }
-    pthread_exit(0); // if NUMBER_OF_PROCESS_CREATED reached MAX_NUMBER_OF_JOBS, exit the thread
+    pthread_exit(NULL); // if NUMBER_OF_PROCESS_CREATED reached MAX_NUMBER_OF_JOBS, exit the thread
 }
 
 int main(){
@@ -377,34 +389,33 @@ int main(){
     return 0;
 }
 
-void readyQueue(int i,int index){
-    struct element * str = sem.pHead;
-    if(i==1){
-        printf("\n\n----------- Producer -----------\n\n");
-    }else if(i==2){
-        printf("\n\n----------- Consumer %d TAKE -----------\n\n", index);
-    }else{
-        printf("\n\n----------- Consumer %d BACK -----------\n\n", index);
-    }
-    if(str == NULL){
-        printf("EMPTY\n");
-    }else{
-        while(str != NULL){
-            struct element * ele = (struct element *)(str->pData);
-            while(ele!=NULL){
-                struct process * process = (struct process *)(ele -> pData);
-                printf("%d (%d), ", process->iPriority, process->iProcessId);
-                ele = ele->pNext;
-            }
-            str = str->pNext;
-        }
-    }
-    if(i==1){
-        printf("\n\n----------- Producer -----------\n\n");
-    }else if(i==2){
-        printf("\n\n----------- Consumer %d TAKE -----------\n\n", index);
-    }else{
-        printf("\n\n----------- Consumer %d BACK -----------\n\n", index);
-    }
-}
-
+// void readyQueue(int i,int index){
+//     struct element * str = sem.pHead;
+//     if(i==1){
+//         printf("\n\n----------- Producer -----------\n\n");
+//     }else if(i==2){
+//         printf("\n\n----------- Consumer %d TAKE -----------\n\n", index);
+//     }else{
+//         printf("\n\n----------- Consumer %d BACK -----------\n\n", index);
+//     }
+//     if(str == NULL){
+//         printf("EMPTY\n");
+//     }else{
+//         while(str != NULL){
+//             struct element * ele = (struct element *)(str->pData);
+//             while(ele!=NULL){
+//                 struct process * process = (struct process *)(ele -> pData);
+//                 printf("%d (%d), ", process->iPriority, process->iProcessId);
+//                 ele = ele->pNext;
+//             }
+//             str = str->pNext;
+//         }
+//     }
+//     if(i==1){
+//         printf("\n\n----------- Producer -----------\n\n");
+//     }else if(i==2){
+//         printf("\n\n----------- Consumer %d TAKE -----------\n\n", index);
+//     }else{
+//         printf("\n\n----------- Consumer %d BACK -----------\n\n", index);
+//     }
+// }
