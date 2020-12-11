@@ -14,10 +14,10 @@ struct data {
     struct element * pHead;
     struct element * pTail;
     int NUMBER_OF_PROCESS_CREATED;
-    long int Avg_response_time;
-    long int Avg_turnAround_time;
-    long int response[MAX_NUMBER_OF_JOBS];
-    long int turnAround[MAX_NUMBER_OF_JOBS];
+    double Avg_response_time;
+    double Avg_turnAround_time;
+    double response[MAX_NUMBER_OF_JOBS];
+    double turnAround[MAX_NUMBER_OF_JOBS];
 };
 
 struct data sem;
@@ -207,11 +207,10 @@ int main(){
     sem.Avg_response_time /= n;
     sem.Avg_turnAround_time /= n;
     printf("----------\n");
-    printf("Average Response Time: %d \n", sem.Avg_response_time);
-    printf("Average TuranAround Time: %d \n", sem.Avg_turnAround_time);
+    printf("Average Response Time: %lf \n", sem.Avg_response_time);
+    printf("Average TuranAround Time: %lf \n", sem.Avg_turnAround_time);
     sem_destroy(&sem.empty);
     sem_destroy(&sem.full);
     sem_destroy(&sem.mutex);
     return 0;
 }
-

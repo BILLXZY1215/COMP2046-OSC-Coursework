@@ -8,5 +8,5 @@ Process Id = 0, Priority = 6, Priority = 6, Previous Burst Time = 134, Remaining
 Process Id = 3, Priority = 12, Priority = 12, Previous Burst Time = 137, Remaining Burst Time = 0, Response Time: 553, TurnAround Time: 690
 Process Id = 6, Priority = 27, Priority = 27, Previous Burst Time = 141, Remaining Burst Time = 0, Response Time: 690, TurnAround Time: 831
 Process Id = 2, Priority = 31, Priority = 31, Previous Burst Time = 144, Remaining Burst Time = 0, Response Time: 831, TurnAround Time: 975
-Average Response Time: 319
-Average turnAround Time: 416
+Average Response Time: 319.100000
+Average turnAround Time: 416.600000

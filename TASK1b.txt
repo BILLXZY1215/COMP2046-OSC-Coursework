@@ -236,5 +236,5 @@ Process Id = 2, Priority = 31, Previous Burst Time = 19, Remaining Burst Time = 
 Process Id = 2, Priority = 31, Previous Burst Time = 14, Remaining Burst Time = 9
 Process Id = 2, Priority = 31, Previous Burst Time = 9, Remaining Burst Time = 4
 TurnAround Time: 976 
-Average Response Time: 429
-Average turnAround Time: 549
+Average Response Time: 429.900000
+Average turnAround Time: 549.900000

@@ -12,10 +12,10 @@ int main(){
     struct element * pHead = NULL;
     struct element * pTail = NULL;
     struct process * otemps[NUMBER_OF_PROCESSES];
-    long int Avg_response_time = 0;
-    long int Avg_turnAround_time = 0;
-    long int response[NUMBER_OF_PROCESSES];
-    long int turnAround[NUMBER_OF_PROCESSES];
+    double Avg_response_time = 0;
+    double Avg_turnAround_time = 0;
+    int response[NUMBER_OF_PROCESSES];
+    int turnAround[NUMBER_OF_PROCESSES];
     // Generate NUMBER_OF_PROCESSES and store in an array and sort by iPriority -> Implement PQ Algorithm
     generatePQ(otemps);
     // Add to Linked List
@@ -104,8 +104,8 @@ int main(){
     //Print Average ResponseTime / TurnAroundTime
     Avg_response_time = Avg_response_time / NUMBER_OF_PROCESSES;
     Avg_turnAround_time = Avg_turnAround_time / NUMBER_OF_PROCESSES;
-    printf("Average Response Time: %d\n", Avg_response_time);
-    printf("Average turnAround Time: %d\n", Avg_turnAround_time);
+    printf("Average Response Time: %lf\n", Avg_response_time);
+    printf("Average turnAround Time: %lf\n", Avg_turnAround_time);
     return 0;
 }
 
