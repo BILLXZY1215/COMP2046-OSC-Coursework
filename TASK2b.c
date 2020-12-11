@@ -16,8 +16,8 @@ struct data {
     int NUMBER_OF_PROCESS_CREATED;
     double Avg_response_time;
     double Avg_turnAround_time;
-    double response[MAX_NUMBER_OF_JOBS];
-    double turnAround[MAX_NUMBER_OF_JOBS];
+    int response[MAX_NUMBER_OF_JOBS];
+    int turnAround[MAX_NUMBER_OF_JOBS];
 
 };
 
@@ -423,4 +423,3 @@ void readyQueue(int i,int index){
         printf("\n\n----------- Consumer %d BACK -----------\n\n", index);
     }
 }
-
