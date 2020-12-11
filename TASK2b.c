@@ -61,10 +61,6 @@ void *producer_func(void* arg){
             }else if(process->iPriority == otemp->iPriority){
                 //otemp has the same priority
                 addLast(otemp, &pSubHead, &pSubTail);
-<<<<<<< HEAD
-=======
-                readyQueue(1,-1);
->>>>>>> f284bc9ef057a7cc146cfbe78c96a750add1faec
                 free(ele); //Avoid Memory Leak
             }else{
                 //otemp has lower priority
