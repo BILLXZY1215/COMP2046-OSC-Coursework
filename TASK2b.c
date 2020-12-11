@@ -53,13 +53,16 @@ void *producer_func(void* arg){
             addLast(ele, &sem.pHead, &sem.pTail);
         }else if(sem.pHead -> pNext == NULL){ //Second Implement
             struct element * pSubHead = (struct element *)(sem.pHead->pData);
+            struct element * pSubTail = pSubHead;
             struct process * process = (struct process *)(pSubHead->pData);
             if(process->iPriority > otemp->iPriority){
                 //otemp has higher priority
                 addFirst(ele, &sem.pHead, &sem.pTail);
             }else if(process->iPriority == otemp->iPriority){
                 //otemp has the same priority
-                addFirst(otemp, &pSubHead, &pSubHead);
+                addLast(otemp, &pSubHead, &pSubTail);
+                readyQueue(1,-1);
+                free(ele); //Avoid Memory Leak
             }else{
                 //otemp has lower priority
                 addLast(ele, &sem.pHead, &sem.pTail);
@@ -98,7 +101,8 @@ void *producer_func(void* arg){
                         subPtr = subPtr -> pNext; // Move to pNext
                     }
                     struct element * pSubTail1 = subPtr;
-                    addFirst(otemp, &pSubHead1, &pSubTail1);
+                    addLast(otemp, &pSubHead1, &pSubTail1);
+                    free(ele); //Avoid Memory Leak
                     break;
 
                 }else if(otemp->iPriority < process2->iPriority){
@@ -118,7 +122,8 @@ void *producer_func(void* arg){
                         subPtr = subPtr -> pNext; // Move to pNext
                     }
                     struct element * pSubTail2 = subPtr;
-                    addFirst(otemp, &pSubHead2, &pSubTail2);
+                    addLast(otemp, &pSubHead2, &pSubTail2);
+                    free(ele); //Avoid Memory Leak
                     break;
 
                 }else{
@@ -239,7 +244,7 @@ void *consumer_func(void* arg){
             sem.Avg_response_time += sem.response[otemp->iProcessId];
             sem.Avg_turnAround_time += sem.turnAround[otemp->iProcessId];
         }
-        
+
         sem_wait(&sem.mutex);
 
         // ---------- Enter Critical Section ----------
@@ -254,7 +259,7 @@ void *consumer_func(void* arg){
         if(first==2){
             printf("Remaining Burst Time = %d, ", otemp -> iRemainingBurstTime);
             printf("TurnAround Time: %d \n", sem.turnAround[otemp->iProcessId]);
-            free(otemp); // avoid memory leak
+            free(otemp); // Avoid Memory Leak
         }else{
             printf("Remaining Burst Time = %d \n", otemp -> iRemainingBurstTime);
         }
@@ -389,33 +394,34 @@ int main(){
     return 0;
 }
 
-// void readyQueue(int i,int index){
-//     struct element * str = sem.pHead;
-//     if(i==1){
-//         printf("\n\n----------- Producer -----------\n\n");
-//     }else if(i==2){
-//         printf("\n\n----------- Consumer %d TAKE -----------\n\n", index);
-//     }else{
-//         printf("\n\n----------- Consumer %d BACK -----------\n\n", index);
-//     }
-//     if(str == NULL){
-//         printf("EMPTY\n");
-//     }else{
-//         while(str != NULL){
-//             struct element * ele = (struct element *)(str->pData);
-//             while(ele!=NULL){
-//                 struct process * process = (struct process *)(ele -> pData);
-//                 printf("%d (%d), ", process->iPriority, process->iProcessId);
-//                 ele = ele->pNext;
-//             }
-//             str = str->pNext;
-//         }
-//     }
-//     if(i==1){
-//         printf("\n\n----------- Producer -----------\n\n");
-//     }else if(i==2){
-//         printf("\n\n----------- Consumer %d TAKE -----------\n\n", index);
-//     }else{
-//         printf("\n\n----------- Consumer %d BACK -----------\n\n", index);
-//     }
-// }
+void readyQueue(int i,int index){
+    struct element * str = sem.pHead;
+    if(i==1){
+        printf("\n\n----------- Producer -----------\n\n");
+    }else if(i==2){
+        printf("\n\n----------- Consumer %d TAKE -----------\n\n", index);
+    }else{
+        printf("\n\n----------- Consumer %d BACK -----------\n\n", index);
+    }
+    if(str == NULL){
+        printf("EMPTY\n");
+    }else{
+        while(str != NULL){
+            struct element * ele = (struct element *)(str->pData);
+            while(ele!=NULL){
+                struct process * process = (struct process *)(ele -> pData);
+                printf("%d (%d), ", process->iPriority, process->iProcessId);
+                ele = ele->pNext;
+            }
+            str = str->pNext;
+        }
+    }
+    if(i==1){
+        printf("\n\n----------- Producer -----------\n\n");
+    }else if(i==2){
+        printf("\n\n----------- Consumer %d TAKE -----------\n\n", index);
+    }else{
+        printf("\n\n----------- Consumer %d BACK -----------\n\n", index);
+    }
+}
+
