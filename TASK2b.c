@@ -205,12 +205,13 @@ void *consumer_func(void* arg){
         }
 
         otemp = (struct process *)removeFirst(&pSubHead, &pSubTail);
+
+        int activate_producer = 0;
         if(otemp->iRemainingBurstTime > TIME_SLICE){
             // process hasn't finished, cannot be removed directly, needs to addLast
             addLast(otemp, &pSubHead, &pSubTail);
         }else{
-            // Process finished running, activate producer
-            sem_post(&sem.empty);
+            activate_producer = 1; // It means at last, the consumer will post a full semaphore
         }
 
         // readyQueue(2,index);
@@ -337,6 +338,11 @@ void *consumer_func(void* arg){
 
         sem_post(&sem.mutex);
 
+        if(activate_producer){
+            // Process finished running, activate producer
+            sem_post(&sem.empty);
+        }
+
 
     }
     pthread_exit(NULL); // if NUMBER_OF_PROCESS_CREATED reached MAX_NUMBER_OF_JOBS, exit the thread
@@ -423,3 +429,4 @@ void readyQueue(int i,int index){
         printf("\n\n----------- Consumer %d BACK -----------\n\n", index);
     }
 }
+

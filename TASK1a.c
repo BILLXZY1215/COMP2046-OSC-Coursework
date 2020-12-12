@@ -47,8 +47,6 @@ int main(){
         Avg_turnAround_time += turnAround[otemp->iProcessId];
         //Print ResponseTime / TurnAroundTime For Each Process
         printf("Process Id = %d, ", otemp -> iProcessId);
-        printf("Priority = %d, ", otemp -> iPriority);
-        printf("Priority = %d, ", otemp -> iPriority);
         printf("Previous Burst Time = %d, ", otemp -> iPreviousBurstTime);
         printf("Remaining Burst Time = %d, ", otemp -> iRemainingBurstTime);
         printf("Response Time: %d, ", response[otemp->iProcessId]);
